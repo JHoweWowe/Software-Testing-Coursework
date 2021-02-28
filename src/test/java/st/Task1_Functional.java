@@ -15,15 +15,11 @@ public class Task1_Functional {
 		parser = new Parser();
 	}
 		
-	// Find Bug 1 - 1.3 1
-	@Test
+	// Find Bug 1 - 1.4 2
+	@Test (expected = RuntimeException.class)
 	public void testBug1() {
-		// Simple test case
-		parser.add("output", "o", Parser.BOOLEAN);
-		parser.parse("-o=false");
-		parser.add("output", "o", Parser.BOOLEAN);
-		parser.parse("-o=true");
-		assertEquals(parser.getBoolean("--output"),false);
+		// Simple test case where you add invalid option name AND expected value type
+		parser.add("", 1);
 	}
 	
 	// Find Bug 2 - 1.3 2
@@ -69,12 +65,19 @@ public class Task1_Functional {
 		int value3 = parser.parse("--option=value");
 		assertEquals(value,value2,value3);
 	}
-
+	
+	// Find Bug 9 - Needs Refactoring
+	@Test(expected = RuntimeException.class)
+	public void testBug9() {
+	    parser.parse("OptionMap [options=\n\t{name=test, shortcut=, type=4, value=}\n]");
+	}
+	
+	// Find Bug 12 - 1.5.1? (Command Line Options is empty)
+	@Test
+	public void testBug12() {
+		int parseResult = parser.parse("");
+		assertEquals(parseResult,1);
+	}
 
 	
-	
-
-	
-
-
 }
