@@ -43,7 +43,24 @@ public class Task1_Functional {
 		assertEquals(parser.parse("--optimize"), true);
 	}
 	
-	// Find Bug 6 - 1.5.4 or 1.5.6??
+	// Find Bug 4 - 1.3.5
+	@Test
+	public void testBug4() {
+		// Simple test case which fails
+		parser.add("optimise", "O", Parser.BOOLEAN);
+		int test = parser.parse("-O=0");
+		boolean result = parser.getBoolean("optimise");
+		assertEquals(result,false);
+	}
+	
+	// Find Bug 5 - 1.6.2
+	@Test
+	public void testBug5() {
+		char result = parser.getChar("no_output");
+		assertEquals(result,'\0');
+	}
+	
+	// Find Bug 6 - 1.5.4
 	@Test
 	public void testBug6() {
 		parser.add("option", "o", Parser.STRING);
@@ -52,6 +69,10 @@ public class Task1_Functional {
 		int value3 = parser.parse("--option=value");
 		assertEquals(value,value2,value3);
 	}
+
+
+	
+	
 
 	
 
