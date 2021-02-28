@@ -18,8 +18,9 @@ public class Task1_Functional {
 	// Find Bug 1 - 1.4 2
 	@Test (expected = RuntimeException.class)
 	public void testBug1() {
-		// Simple test case where you add invalid option name AND expected value type
-		parser.add("", 1);
+		// Simple test case where you add 
+		// invalid option name and shortcut and expected value type
+		parser.add("", "", 1);
 	}
 	
 	// Find Bug 2 - 1.3 2
