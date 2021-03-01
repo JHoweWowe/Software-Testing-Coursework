@@ -3,6 +3,8 @@ package st;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -273,176 +275,14 @@ public class Task1_Functional_Working {
 		char result = parser.getChar("no_output");
 		assertEquals(result,'\0');
 	}
-	
-	  @Test(timeout = 4000)
-	  public void test00()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.parse("\t{name=");
-	      assertEquals((-3), int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test01()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      parser0.add("Momh", "", 2);
-	      assertEquals(2, Parser.BOOLEAN);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test02()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.parse("-");
-	        fail("Expecting exception: StringIndexOutOfBoundsException");
-	      
-	      } catch(StringIndexOutOfBoundsException e) {
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test03()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.add((String) null, (String) null, 2);
-	        fail("Expecting exception: NullPointerException");
-	      
-	      } catch(NullPointerException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test04()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.add("", 4);
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test05()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.add((String) null, 1);
-	        fail("Expecting exception: NullPointerException");
-	      
-	      } catch(NullPointerException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test06()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.getChar((String) null);
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	         
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test07()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      boolean boolean0 = parser0.getBoolean((String) null);
-	      assertFalse(boolean0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test08()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      String string0 = parser0.getString("fuq~X55$*dCu");
-	      assertEquals("", string0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test09()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.parse("- ");
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	         
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test10()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.parse("-x");
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	         
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test11()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.parse("--JL$,4Tlqh3");
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	         
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test12()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.parse(" ");
-	      assertEquals((-3), int0);
-	  }
-
+	// Bug 8
 	  @Test(timeout = 4000)
 	  public void test13()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.parse("-ffyq=@70?a]**");
-	      assertEquals(0, int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test14()  throws Throwable  {
-	      Parser parser0 = new Parser();
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("v", "", 2);
 	      // Undeclared exception!
 	      try { 
-	        parser0.parse("");
+	        optionMap0.setValueWithOptioShortcut("", "sZ_wrMcah(");
 	        fail("Expecting exception: RuntimeException");
 	      
 	      } catch(RuntimeException e) {
@@ -453,12 +293,15 @@ public class Task1_Functional_Working {
 	      }
 	  }
 
+
+	  // Bug 11
 	  @Test(timeout = 4000)
 	  public void test15()  throws Throwable  {
-	      Parser parser0 = new Parser();
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("v", "J", 2);
 	      // Undeclared exception!
 	      try { 
-	        parser0.parse("OptionMap [options=\n\t{name=false, shortcut=, type=4, value=}\n]");
+	        optionMap0.setValueWithOptioShortcut("J", "v");
 	        fail("Expecting exception: RuntimeException");
 	      
 	      } catch(RuntimeException e) {
@@ -468,28 +311,15 @@ public class Task1_Functional_Working {
 	         
 	      }
 	  }
-
-	  @Test(timeout = 4000)
-	  public void test16()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.parse((String) null);
-	      assertEquals((-1), int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test17()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.parse("S~}xqux&jW[$");
-	      assertEquals((-3), int0);
-	  }
-
+	  
+	  // Bug 10
 	  @Test(timeout = 4000)
 	  public void test18()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      parser0.add("false", 4);
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("v", "", 2);
 	      // Undeclared exception!
 	      try { 
-	        parser0.getInteger("false");
+	        optionMap0.setValueWithOptionName("", "OptionMap [options=\n\t{name=v, shortcut=, type=2, value=}\n]");
 	        fail("Expecting exception: RuntimeException");
 	      
 	      } catch(RuntimeException e) {
@@ -498,71 +328,140 @@ public class Task1_Functional_Working {
 	         //
 	         
 	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test19()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      parser0.add("false", 3);
-	      int int0 = parser0.getInteger("false");
-	      assertEquals(0, int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test20()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      parser0.add("false", 2);
-	      int int0 = parser0.getInteger("false");
-	      assertEquals(0, int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test21()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      // Undeclared exception!
-	      try { 
-	        parser0.add("&lLGC", "&lLGC", 589);
-	        fail("Expecting exception: RuntimeException");
-	      
-	      } catch(RuntimeException e) {
-	         //
-	         // no message in exception (getMessage() returned null)
-	         //
-	      }
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test22()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      String string0 = parser0.toString();
-	      assertEquals("OptionMap [options=\n]", string0);
 	  }
 
 	  @Test(timeout = 4000)
 	  public void test23()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      int int0 = parser0.getInteger("S~}xqux&jW[$");
-	      assertEquals(0, int0);
-	  }
-
-	  @Test(timeout = 4000)
-	  public void test24()  throws Throwable  {
-	      Parser parser0 = new Parser();
-	      parser0.add("false", 1);
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("K", "v", 1);
+	      optionMap0.store("v", "K", 2);
 	      // Undeclared exception!
 	      try { 
-	        parser0.getInteger("false");
+	        optionMap0.getValue("v");
 	        fail("Expecting exception: RuntimeException");
 	      
 	      } catch(RuntimeException e) {
 	         //
 	         // no message in exception (getMessage() returned null)
 	         //
+	         
 	      }
 	  }
-	
 
+	  @Test(timeout = 4000)
+	  public void test24()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("K", "v", 1);
+	      String string0 = optionMap0.getValue("v");
+	      assertEquals("", string0);
+	  }
 
+	  @Test(timeout = 4000)
+	  public void test25()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("v", "", 2);
+	      String string0 = optionMap0.getValue("v");
+	      assertEquals("", string0);
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test26()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("v", "", 2);
+	      optionMap0.store("v", "rZge", 1);
+	      assertEquals(2, OptionMap.BOOLEAN);
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test27()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      // Undeclared exception!
+	      try { 
+	        optionMap0.store("", "&", 2);
+	        fail("Expecting exception: RuntimeException");
+	      
+	      } catch(RuntimeException e) {
+	         //
+	         // no message in exception (getMessage() returned null)
+	         //
+	         
+	      }
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test28()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      // Undeclared exception!
+	      try { 
+	        optionMap0.store("", "", 2);
+	        fail("Expecting exception: RuntimeException");
+	      
+	      } catch(RuntimeException e) {
+	         //
+	         // no message in exception (getMessage() returned null)
+	         //
+	         
+	      }
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test29()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("NHK", "v", 2);
+	      optionMap0.setValueWithOptionName("NHK", "NHK");
+	      // Undeclared exception!
+	      try { 
+	        optionMap0.setValueWithOptionName("NHK", "q+nlUy-11c");
+	        fail("Expecting exception: RuntimeException");
+	      
+	      } catch(RuntimeException e) {
+	         //
+	         // no message in exception (getMessage() returned null)
+	         //
+	         
+	      }
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test30()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      OptionMap.Option optionMap_Option0 = optionMap0.new Option("", "", (Integer) 4);
+	      optionMap_Option0.setShortcut("");
+	      assertEquals("", optionMap_Option0.getValue());
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test31()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      OptionMap.Option optionMap_Option0 = optionMap0.new Option((String) null, (String) null, (Integer) 4);
+	      optionMap_Option0.setName((String) null);
+	      assertNull(optionMap_Option0.getName());
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test32()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      optionMap0.store("N", "v", 2);
+	      // Undeclared exception!
+	      try { 
+	        optionMap0.setValueWithOptionName("v", "v");
+	        fail("Expecting exception: RuntimeException");
+	      
+	      } catch(RuntimeException e) {
+	         //
+	         // no message in exception (getMessage() returned null)
+	         //
+	         
+	      }
+	  }
+
+	  @Test(timeout = 4000)
+	  public void test33()  throws Throwable  {
+	      OptionMap optionMap0 = new OptionMap();
+	      OptionMap.Option optionMap_Option0 = optionMap0.new Option("w+BW)t!pQ6{Kh8O-xk", (Integer) 3);
+	      optionMap_Option0.setType((Integer) optionMap0.INTEGER);
+	      assertEquals("", optionMap_Option0.getValue());
+	  }
 
 
 }

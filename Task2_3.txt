@@ -1,0 +1,13 @@
+With technology tools rapidly changing and innovations continuously improving, agile developers should be familiar with testing products and services for the real world. It would be impractical to manually create tests and it would be difficult to cover each functionality on its own.
+
+While using test generation tools such as EvoSuite in small projects may not be practical, but in big projects this approach would certainly be useful.
+
+Advantages:
+- Difficult to cover every reasonable test case, so automated testing would do a sufficient job
+- 2
+- 3
+
+Disadvantages:
+- Depending on project's size, generating tests may take a long period of time. Especially when using automated test generation for large project sizes.
+- 2
+- 3
