@@ -24,6 +24,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="ST_COURSEWORK.jar"/>
+	<classpathentry kind="lib" path="/home/jhowe/Education/Year3/Sem2/ST/STCOURSEWORK2021/ST_COURSEWORK.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
