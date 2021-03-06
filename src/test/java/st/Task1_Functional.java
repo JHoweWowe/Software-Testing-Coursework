@@ -86,10 +86,10 @@ public class Task1_Functional {
 		parser.parse("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY");
 	}
 	
-	// Bug 10 - Parse with newline character
+	// Bug 10 - Parse shortcut with no option
 	@Test
 	public void testBug10() {
-		parser.add("v", "", Parser.STRING);
+		parser.add("v", Parser.STRING);
 		parser.parse("--v=\r");
 	}
 	
