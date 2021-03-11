@@ -52,7 +52,9 @@ public class Task3_TDD_1 {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=test123.txt");
 		List<Character> l = parser.getCharacterList("option");
-		List<Character> actualList
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','1','2','3','.','t','x','t'));
+		assertEquals(l, actualList);
 		
 	}
 	// Within #3: Character List has symbols - runtimeexception should occur
@@ -103,6 +105,25 @@ public class Task3_TDD_1 {
 		parser.parse("--option=e-a");
 		List<Character> list = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>(Arrays.asList('e','d','c','b','a'));
+		assertEquals(list, actualList);
+	}
+	
+	// Extra specification tests for #6 regarding hyphen
+	@Test
+	public void checkSpec6Bug1() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=b-7");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>(Arrays.asList('b','a','9','8','7'));
+		assertEquals(list, actualList);
+	}
+	
+	@Test
+	public void checkSpec6Bug2() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=#*-t3st.tXt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>(Arrays.asList('t','3','s','t','.','t','x','t'));
 		assertEquals(list, actualList);
 	}
 
