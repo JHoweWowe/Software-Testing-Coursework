@@ -9,5 +9,5 @@ Advantages:
 
 Disadvantages:
 - Depending on project's size, generating tests may take a long period of time. Especially when using automated test generation for large project sizes.
-- 2
+- Ensuring the unit tests are covered from specifications given in the class so it would take time and assuming your main class meets the functional requirements properly
 - 3

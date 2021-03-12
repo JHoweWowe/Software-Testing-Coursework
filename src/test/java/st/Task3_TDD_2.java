@@ -18,15 +18,16 @@ public class Task3_TDD_2 {
 		parser = new Parser();
 	}
 	
-	// Specification #1: Order should matter
+	// Specification #1: Order should matter, returns the value of option with full name
 	@Test
 	public void checkSpec1() {
-		parser.add("o", "a", Parser.STRING);
-		parser.parse("--o=test");
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("-o=test2");
+		parser.add("o", "a", Parser.STRING);
+		parser.parse("--o=test");
+
 		List<Character> expectedList = parser.getCharacterList("o");
-		List<Character> actualList = new ArrayList<Character>(Arrays.asList('t','e','s','t','2'));
+		List<Character> actualList = new ArrayList<Character>(Arrays.asList('t','e','s','t'));
 		assertEquals(expectedList, actualList);
 	}
 	
@@ -34,7 +35,7 @@ public class Task3_TDD_2 {
 	@Test
 	public void checkSpec2() {
 		parser.add("list", "l", Parser.STRING);
-		parser.parse("--list=");
+		parser.parse("--list");
 		List<Character> l = parser.getCharacterList("list");
 		List<Character> emptyList = new ArrayList<Character>();
 		assertEquals(l, emptyList);
@@ -132,6 +133,27 @@ public class Task3_TDD_2 {
 		List<Character> actualList = new ArrayList<Character>(Arrays.asList('t','3','s','t','.','t','x','t'));
 		assertEquals(list, actualList);
 	}
+	
+	@Test
+	public void checkSpec6Bug3() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=8-D.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('8','9','a','b','c','d','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
+	
+	@Test
+	public void checkSpec6Bug4() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=D-8.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('d','c','b','a','9','8','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
+
 
 
 }
