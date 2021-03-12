@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // This modified class file is used for Task 3 
+// DEVELOPER NOTE: Uses ASCII value of character
+// Notes: https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
 
 public class Parser {
 	public static final int INTEGER = 1;
@@ -115,19 +117,60 @@ public class Parser {
 			if ((ch.equals('-')) && (i == 0)) {
 				return new ArrayList<Character>();
 			}
+			// Check other indices for hyphen [VERY IMPORTANT]
+			else if (ch.equals('-') && (i >= 1) && (i <= str.length() - 2)) {
+				Character beforeCh = str.toLowerCase().charAt(i-1);
+				Character afterCh = str.toLowerCase().charAt(i+1);
+				// Check conditions for hyphen
+				// Both characters / digits
+				if ((Character.isLetterOrDigit(beforeCh)) && (Character.isLetterOrDigit(afterCh))) {
+					
+					list.remove(beforeCh);
+					
+					int asciiValue = beforeCh;
+					int targetedAsciiValue = afterCh;
+					
+					// Range from ASCII values 48-57 (0-9) and 97-122 (a-z)
+					while (asciiValue != targetedAsciiValue) {
+						
+						if (asciiValue < targetedAsciiValue) {
+							list.add((char) asciiValue);
+							if (asciiValue == 57) {
+								asciiValue = 97;
+							}
+							else if (asciiValue == 122) {
+								asciiValue = 48;
+							}
+							else {
+								asciiValue++;
+							}
+						}
+
+						if (targetedAsciiValue < asciiValue) {
+							list.add((char) asciiValue);
+							if (asciiValue == 48) {
+								asciiValue = 122;
+							}
+							else if (asciiValue == 97) {
+								asciiValue = 57;
+							}
+							else {
+								asciiValue--;
+							}
+						}
+						
+					}
+					
+				}
+			}
 			else if ((ch.equals('-') && (i == str.toCharArray().length))) {
 				// Do nothing
 			}
-			// Check other indcies for hyphen
 			
 			else if (Character.isUpperCase(ch)) {
 				list.add(Character.toLowerCase(ch));
 			}
 			else if (Character.isLowerCase(ch) || Character.isDigit(ch) || ch.equals('.')) {
-				list.add(ch);
-			}
-			// Be careful with hyphen
-			else if (ch.equals('-')) {
 				list.add(ch);
 			}
 		}

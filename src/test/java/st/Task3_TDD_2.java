@@ -97,11 +97,22 @@ public class Task3_TDD_2 {
 	@Test
 	public void checkSpec6() {
 		parser.add("option", "o", Parser.STRING);
-		parser.parse("--option=e-a");
+		parser.parse("--option=F-a");
 		List<Character> list = parser.getCharacterList("option");
-		List<Character> actualList = new ArrayList<Character>(Arrays.asList('e','d','c','b','a'));
+		List<Character> actualList = new ArrayList<Character>(Arrays.asList('f','e','d','c','b','a'));
 		assertEquals(list, actualList);
 	}
+	
+	@Test
+	public void checkSpec6Bug0() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=a-E");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('a','b','c','d','e'));
+		assertEquals(list, actualList);
+	}
+	
 	
 	// Extra specification tests for #6 regarding hyphen
 	@Test
