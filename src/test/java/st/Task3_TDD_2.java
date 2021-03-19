@@ -153,30 +153,6 @@ public class Task3_TDD_2 {
 		(Arrays.asList('d','c','b','a','9','8','.','t','x','t'));
 		assertEquals(list, actualList);
 	}
-	
-	// Hidden specifications but should also check for multiple hyphens
-	
-	@Test
-	public void checkMultiHyphen1() {
-		parser.add("option", Parser.STRING);
-		parser.parse("--option=1-3-1");
-		List<Character> list = parser.getCharacterList("option");
-		List<Character> actualList = new ArrayList<Character>
-		(Arrays.asList('1','2','3','3','2','1'));
-		assertEquals(list, actualList);
-	}
-	
-	// Hidden specification but should also check for multiple hyphens
-	// Should return 'c' because of 
-	@Test
-	public void checkMultiHyphen2() {
-		parser.add("option", "o", Parser.STRING);
-		parser.parse("--option=c-c-c");
-		List<Character> list = parser.getCharacterList("option");
-		List<Character> actualList = new ArrayList<Character>
-		(Arrays.asList('c','c'));
-		assertEquals(list, actualList);
-	}
 
 
 
