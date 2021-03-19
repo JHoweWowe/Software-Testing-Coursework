@@ -72,7 +72,7 @@ public class Task1_Functional {
 		parser.getInteger("option");
 	}
 	
-	// Bug 8 - Add option name as shortcut and parse with invalid shortcut
+	// Bug 8 - Add option name as shortcut and parse where there is an underscore
 	@Test
 	public void testBug8() {
 		parser.add("k", "", Parser.STRING);
