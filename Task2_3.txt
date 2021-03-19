@@ -5,9 +5,9 @@ While using test generation tools such as EvoSuite in small projects may not be 
 Advantages:
 - Difficult to cover every reasonable test case, so automated testing would do a sufficient job
 - Automated testing covers many testing techniques, including mutation testing and both branch and statement coverage
-- Used in many industries and companies
+- Automated testing is used in many industries and companies, and has many practical applications
 
 Disadvantages:
-- Depending on project's size, generating tests may take a long period of time. Especially when using automated test generation for large project sizes.
-- Ensuring the unit tests are covered from specifications given in the class so it would take time and assuming your main class meets the functional requirements properly
-- 3
+- Depending on project's size, generating tests may take a long period of time, espeically when using automated test generation for large project sizes.
+- Ensuring the unit tests are covered from specifications given in the class so it would take time and assuming your code meet the functional requirements properly
+- May not be practical in small projects due to the large amount of time and learning required to setup automated testing

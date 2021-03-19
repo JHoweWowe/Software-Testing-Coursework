@@ -108,6 +108,8 @@ public class Parser {
 		// Obtain String value
 		String str = getString(option);
 		List<Character> list = new ArrayList<Character>();
+		
+		int validHyphens = 0;
 					
 		// Initial parsing
 		for (int i = 0; i < str.toCharArray().length; i++) {
@@ -129,6 +131,10 @@ public class Parser {
 					
 					int asciiValue = beforeCh;
 					int targetedAsciiValue = afterCh;
+					
+					if (validHyphens >= 1) {
+						list.add(beforeCh);
+					}
 					
 					// Range from ASCII values 48-57 (0-9) and 97-122 (a-z)
 					while (asciiValue != targetedAsciiValue) {
@@ -160,6 +166,8 @@ public class Parser {
 						}
 						
 					}
+					
+					validHyphens++;
 					
 				}
 			}
