@@ -17,20 +17,20 @@ public class Task1_Functional {
 		parser = new Parser();
 	}
 			
-	// Find Bug 1 - 1.4 2 (Empty option name and shortcut)
+	// Find Bug 1 - Empty option name and shortcut
 	@Test
 	public void testBug1() {
 		parser.add("", "", Parser.STRING);
 	}
 	
-	// Find Bug 2 - 1.3 2 (Invalid shortcut name)
+	// Find Bug 2 - Invalid shortcut name
 	@Test
 	public void testBug2() {		
 		String shortCutName = "#*(*#@";
 		parser.add(shortCutName, "o", Parser.STRING);
 	}
 	
-	// Find Bug 3 - 1.4 1 (Overriding)
+	// Find Bug 3 - Overriding option without shortcut
 	@Test
 	public void testBug3() {
 		// Simple test case
@@ -39,16 +39,15 @@ public class Task1_Functional {
 		assertEquals(parser.parse("--optimize"), true);
 	}
 	
-	// Find Bug 4 - 1.3.5
+	// Find Bug 4 - Option set as 0 with boolean option
 	@Test
 	public void testBug4() {
 		parser.add("optimise", "O", Parser.BOOLEAN);
-		int test = parser.parse("-O=0");
+		int test = parser.parse("--optimise=0");
 		boolean result = parser.getBoolean("optimise");
-		assertEquals(result,false);
 	}
 	
-	// Find Bug 5 - 1.6.2
+	// Find Bug 5 - Option not defined
 	@Test
 	public void testBug5() {
 		char result = parser.getChar("no_output");
@@ -72,7 +71,7 @@ public class Task1_Functional {
 		parser.getInteger("option");
 	}
 	
-	// Bug 8 - Add option name as shortcut and parse with invalid shortcut
+	// Bug 8 - Parse with underline included
 	@Test
 	public void testBug8() {
 		parser.add("k", "", Parser.STRING);
@@ -100,14 +99,14 @@ public class Task1_Functional {
 		parser.parse("-J=v");
 	}
 	
-	// Find Bug 12 - 1.5.1? (Command Line Options is empty)
+	// Find Bug 12 - Command Line Options is empty
 	@Test
 	public void testBug12() {
 		int parseResult = parser.parse("");
 		assertEquals(parseResult,1);
 	}
 		
-	// Bug 13 - 1.3 4 (Option can have shortcut that has same name of another option)
+	// Bug 13 - Option can have shortcut that has same name of another option
 	@Test
 	public void testBug13() {
 		parser.add("key", "value", Parser.STRING);

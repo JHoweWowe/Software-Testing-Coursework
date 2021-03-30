@@ -56,8 +56,8 @@ public class Task3_TDD_1 {
 		List<Character> actualList = new ArrayList<Character>
 		(Arrays.asList('t','e','s','t','1','2','3','.','t','x','t'));
 		assertEquals(l, actualList);
-		
 	}
+	
 	// Within #3: Character List has symbols - just remove them
 	@Test
 	public void checkSpec3Bug1(){
@@ -178,6 +178,27 @@ public class Task3_TDD_1 {
 		List<Character> list = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>
 		(Arrays.asList('c','c'));
+		assertEquals(list, actualList);
+	}
+	
+	@Test
+	public void checkSpecMultipleHyphens3() {
+		parser.add("option", Parser.STRING);
+		parser.parse("--option=test5-3-1.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','5','4','3','3','2','1','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
+	
+	// Hyphens placed in valid and invalid places
+	@Test
+	public void checkSpecMultipleHyphens4() {
+		parser.add("option", Parser.STRING);
+		parser.parse("--option=test1-3-.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','1','2','3','.','t','x','t'));
 		assertEquals(list, actualList);
 	}
 	

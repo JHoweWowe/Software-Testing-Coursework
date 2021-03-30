@@ -30,6 +30,18 @@ public class Task3_TDD_2 {
 		List<Character> actualList = new ArrayList<Character>(Arrays.asList('t','e','s','t'));
 		assertEquals(expectedList, actualList);
 	}
+	@Test
+	public void checkSpec1Part2() {
+		parser.add("o", "a", Parser.STRING);
+		parser.parse("--o=fullOption");
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("-o=shortcutOption");
+
+		List<Character> expectedList = parser.getCharacterList("o");
+		List<Character> actualList = new ArrayList<Character>(
+				Arrays.asList('f','u','l','l','o','p','t','i','o','n'));
+		assertEquals(expectedList, actualList);
+	}
 	
 	// Specification #2: If option is not provided a value, empty list is returned
 	@Test
@@ -40,7 +52,17 @@ public class Task3_TDD_2 {
 		List<Character> emptyList = new ArrayList<Character>();
 		assertEquals(l, emptyList);
 	}
-	
+	// For option without shortcut
+	@Test
+	public void checkSpec2Part2() {
+		parser.add("option", Parser.STRING);
+		parser.parse("--option");
+		List<Character> l = parser.getCharacterList("option");
+		List<Character> emptyList = new ArrayList<Character>();
+		assertEquals(l, emptyList);
+	}
+
+		
 	// Specification #3: Character List may only have letters, digits and full stops
 	@Test
 	public void checkSpec3() {
@@ -52,25 +74,44 @@ public class Task3_TDD_2 {
 		assertEquals(l, actualList);
 		
 	}
-	// Within #3: Character List has symbols - just remove them
+	// Within #3: Ensuring character list value only has letters, digits and full stops
 	@Test
-	public void checkSpec3Bug1(){
+	public void checkSpec3Part1(){
 		parser.add("option", "o", Parser.STRING);
-		parser.parse("--option=@Af*&23#");
+		parser.parse("--option=@af,*.&23#");
 		List<Character> l = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>
-		(Arrays.asList('a','f','2','3'));
+		(Arrays.asList('a','f','.','2','3'));
+		assertEquals(l, actualList);
+	}
+	// String has more symbols
+	@Test
+	public void checkSpec3Part2() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=[+3!a#%.r&(9@$]k^q*");
+		List<Character> l = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('3','a','.','r','9','k','q'));
 		assertEquals(l, actualList);
 	}
 	
 	// Specification #4: Value of option isn't case sensitive
 	@Test
-	public void checkSpec4() {
+	public void checkSpec4Part1() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=Test123.txt");
 		List<Character> listOne = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>
 		(Arrays.asList('t','e','s','t','1','2','3','.','t','x','t'));
+		assertEquals(listOne, actualList);
+	}
+	@Test
+	public void checkSpecPart2() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=yEeToRnOYE3t.tXt");
+		List<Character> listOne = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('y','e','e','t','o','r','n','o','y','e','3','t','.','t','x','t'));
 		assertEquals(listOne, actualList);
 	}
 	
@@ -93,6 +134,16 @@ public class Task3_TDD_2 {
 		(Arrays.asList('t','e','s','t','1','2','3','.','t','x','t'));
 		assertEquals(list, actualList);
 	}
+	// Hyphen both placed in end of string and in between valid characters
+	@Test
+	public void checkSpec5Part3() {
+		parser.add("option", "o", Parser.STRING);
+		parser.parse("--option=te!s#t1-2-3-.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','1','2','2','3','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
 	
 	// Specification #6: Hyphen (Order matters)
 	@Test
@@ -105,7 +156,7 @@ public class Task3_TDD_2 {
 	}
 	
 	@Test
-	public void checkSpec6Bug0() {
+	public void checkSpec6Part0() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=a-E");
 		List<Character> list = parser.getCharacterList("option");
@@ -115,9 +166,9 @@ public class Task3_TDD_2 {
 	}
 	
 	
-	// Extra specification tests for #6 regarding hyphen
+	// Extra specification tests for #6 regarding hyphen and using a mixture of alphanumerical characters
 	@Test
-	public void checkSpec6Bug1() {
+	public void checkSpec6Part1() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=b-7");
 		List<Character> list = parser.getCharacterList("option");
@@ -126,7 +177,7 @@ public class Task3_TDD_2 {
 	}
 	
 	@Test
-	public void checkSpec6Bug2() {
+	public void checkSpec6Part2() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=#*-t3st.tXt");
 		List<Character> list = parser.getCharacterList("option");
@@ -135,7 +186,7 @@ public class Task3_TDD_2 {
 	}
 	
 	@Test
-	public void checkSpec6Bug3() {
+	public void checkSpec6Part3() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=8-D.txt");
 		List<Character> list = parser.getCharacterList("option");
@@ -145,7 +196,7 @@ public class Task3_TDD_2 {
 	}
 	
 	@Test
-	public void checkSpec6Bug4() {
+	public void checkSpec6Part4() {
 		parser.add("option", "o", Parser.STRING);
 		parser.parse("--option=D-8.txt");
 		List<Character> list = parser.getCharacterList("option");
@@ -154,27 +205,48 @@ public class Task3_TDD_2 {
 		assertEquals(list, actualList);
 	}
 	
-	// Specification for multiple hyphens
+	/** Specification for multiple hyphens **/
 	@Test
 	public void checkSpecMultipleHyphens1() {
 		parser.add("option", "o", Parser.STRING);
-		parser.parse("--option=1-3-1");
+		parser.parse("--option=0-3-1");
 		List<Character> list = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>
-		(Arrays.asList('1','2','3','3','2','1'));
+		(Arrays.asList('0','1','2','3','3','2','1'));
 		assertEquals(list, actualList);
 	}
 	
+	// Parsing with same character in between each hyphen in the string
 	@Test
 	public void checkSpecMultipleHyphens2() {
 		parser.add("option", "o", Parser.STRING);
-		parser.parse("--option=c-c-c");
+		parser.parse("--option=d-d-d");
 		List<Character> list = parser.getCharacterList("option");
 		List<Character> actualList = new ArrayList<Character>
-		(Arrays.asList('c','c'));
+		(Arrays.asList('d','d'));
 		assertEquals(list, actualList);
 	}
-
-
+	
+	// Same numerical value appears twice in a string
+	@Test
+	public void checkSpecMultipleHyphens3() {
+		parser.add("option", Parser.STRING);
+		parser.parse("--option=test3-3-1.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','3','3','2','1','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
+	
+	// Hyphens placed in valid and invalid places
+	@Test
+	public void checkSpecMultipleHyphens4() {
+		parser.add("option", Parser.STRING);
+		parser.parse("--option=test2-4-.txt");
+		List<Character> list = parser.getCharacterList("option");
+		List<Character> actualList = new ArrayList<Character>
+		(Arrays.asList('t','e','s','t','2','3','4','.','t','x','t'));
+		assertEquals(list, actualList);
+	}
 
 }
