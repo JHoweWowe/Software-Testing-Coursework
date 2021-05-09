@@ -1,26 +1,22 @@
 # STCOURSEWORK2021
 
+**Final Grade:** 89% (A2)
+
+**Programming Language:** Java
+
+**IDE:** Eclipse
+
 ## Overview
-For coursework purposes, EvoSuite will be used to automate testing and enhance finding additional bugs not met properly in the specifications and show coverage.
+For coursework purposes, EvoSuite will be used for automated testing and enhance finding additional bugs not met properly in the specifications and show coverage.
 
 ## Developer Notes
 Java 8 SDK, Maven and EvoSuite should all be installed
 EvoSuite will be executed using the command line but Eclipse  will be used for running JUnit 4 tests alongside with the corresponding classes. The EvoSuite plugin for Eclipse is only for experimental purposes.
 
-## Installation Process
-This section includes how to generate EvoSuite tests and running them along with existing tests
+## Installation Instructions
+Refer to `installation.md` file
 
-### Pre-Installation
-Place the **evosuite-1.1.0.jar** file inside the desired directory location.
-
-### Generating Tests from Scratch
-1. At current directory with evosuite jar, create an environment variable to point to EvoSuite. So type in `export EVOSUITE="java -jar $(pwd)/evosuite-1.1.0.jar"`
-2. Now can type in `$EVOSUITE -target ST_COURSEWORK.jar`
-
-Executing EvoSuite test cases where it handles branch coverage (Task 2.2): `$EVOSUITE -target ST_COURSEWORK.jar -criterion branch`
-
-### Generating Tests with Existing Tests
-This command can be executed with existing tests along with JUnit tests created in Task 1: `$EVOSUITE -target ST_COURSEWORK.jar -Djunit=st.Task1_functional -criterion branch`
-
-## Resources
-https://www.evosuite.org/documentation/tutorial-part-1/
+## Organization
+- Description.pdf: Contains instructions and overall details
+- Specification.pdf: Explains further in-detail regarding the functional requirements
+- coursework-results.txt: Personal coursework feedback
